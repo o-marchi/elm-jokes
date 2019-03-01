@@ -1,37 +1,170 @@
-/*
-  elm-hot creates an additional div wrapper around the app to make HMR possible.
-  This could break styling in development mode if you are using Elm UI.
+/* -----------------------------------------------------------------------------
+ - BASIC
+ ---------------------------------------------------------------------------- */
 
-  More context in the issue:
-    https://github.com/halfzebra/create-elm-app/issues/320
-*/
-[data-elm-hot="true"] {
-  height: inherit;
-}
+[data-elm-hot="true"] { height: inherit; }
 
 body {
-  font-family: 'Source Sans Pro', 'Trebuchet MS', 'Lucida Grande', 'Bitstream Vera Sans', 'Helvetica Neue', sans-serif;
+  background: #FCFFD6;
+  font-family: 'Gafata', sans-serif;
   margin: 0;
   text-align: center;
-  color: #293c4b;
-}
-
-h1 {
-  font-size: 30px;
-}
-
-img {
-  margin: 20px 0;
-  max-width: 200px;
+  color: #293c4;
 }
 
 .app {
-  width: 800px;
-  margin: 0 auto;
+  width: 600px;
+  max-width: 90%;
+  margin: 50px auto 0;
 }
 
-.joke {
-  background: #f2f6ff;
-  padding: 20px;
-  flex: 1;
+
+/* -----------------------------------------------------------------------------
+ - LOADER
+ ---------------------------------------------------------------------------- */
+
+ .loader {
+   color: #838570;
+   font-family: Consolas, Menlo, Monaco, monospace;
+   font-weight: bold;
+   font-size: 120px;
+   opacity: 0.8;
+   margin: 120px auto 0;
+   -webkit-touch-callout: none;
+     -webkit-user-select: none;
+      -khtml-user-select: none;
+        -moz-user-select: none;
+         -ms-user-select: none;
+             user-select: none;
+ }
+
+ .loader span {
+   display: inline-block;
+   -webkit-animation: pulse 0.4s alternate infinite ease-in-out;
+           animation: pulse 0.4s alternate infinite ease-in-out;
+ }
+
+ .loader span:nth-child(odd) {
+   -webkit-animation-delay: 0.4s;
+           animation-delay: 0.4s;
+ }
+
+ @-webkit-keyframes pulse {
+  to {
+    -webkit-transform: scale(0.8);
+            transform: scale(0.8);
+    opacity: 0.5;
+  }
 }
+
+ @keyframes pulse {
+   to {
+     -webkit-transform: scale(0.8);
+             transform: scale(0.8);
+     opacity: 0.5;
+   }
+ }
+
+
+/* -----------------------------------------------------------------------------
+ - Joke
+ ---------------------------------------------------------------------------- */
+
+.joke h1 {
+  color: #6C3C64;
+  font-size: 33px;
+  line-height: 140%;
+}
+
+.joke .punchline {
+  display: flex;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  min-height: 94px;
+  width: 100%;
+  justify-items: center;
+  align-items: center;
+  margin: 60px 0;
+}
+
+.joke .punchline p,
+.joke .punchline span {
+  width: 100%;
+}
+
+.joke .punchline p {
+  font-size: 30px;
+  color: black;
+}
+
+.joke .punchline span {
+  font-size: 25px;
+  font-style: italic;
+  color: black;
+  min-height: 94px;
+  line-height: 94px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.joke .punchline span:hover { background: rgba(0, 0, 0, 0.1); }
+
+
+/* -----------------------------------------------------------------------------
+ - Another One Button
+ ---------------------------------------------------------------------------- */
+
+.button {
+   font-size: 26px;
+   box-sizing: border-box;
+   border: none;
+   -webkit-user-select: none;
+      -moz-user-select: none;
+       -ms-user-select: none;
+           user-select: none;
+   position: relative;
+   z-index: 1;
+   padding: 0;
+   width: 200px;
+   height: 60px;
+   border-radius: 5px;
+   cursor: pointer;
+ }
+ .button:after {
+   content: "";
+   position: absolute;
+   top: 0;
+   left: 0;
+   right: 0;
+   width: 200px;
+   height: 100%;
+   background-color: #4A2C45;
+   z-index: -1;
+   border-radius: 5px;
+ }
+ .button:focus, .button:active {
+   outline: none;
+ }
+ .button .button__inner {
+   color: white;
+   padding: 16px 0;
+   border-radius: 5px 5px 0 0;
+   box-sizing: border-box;
+   background-color: #6C3C64;
+   display: block;
+   width:200px;
+   height: 60px;
+   transition: -webkit-transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+   transition: transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+   transition: transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9), -webkit-transform 0.6s cubic-bezier(0, 0.9, 0.13, 0.9);
+   -webkit-transform: translate3D(0, -7px, 0);
+           transform: translate3D(0, -7px, 0);
+   position: relative;
+ }
+ .button:active .button__inner {
+   -webkit-transform: translate3D(0, 0, 0);
+           transform: translate3D(0, 0, 0);
+ }
+ .button:hover .button__inner, .button:focus .button__inner {
+   background-color: #6C3C64;
+ }
